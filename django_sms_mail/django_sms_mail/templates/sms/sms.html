@@ -16,28 +16,33 @@
 			              <legend class="">Send SMS using Twilio</legend>
 			            </div>
 			            <div class="control-group">
+			              <div class="controls" style='color:red'>
+			                    {% if error %}
+			                    	{{ error|linebreaksbr }}
+			                    {% endif %}
+			              </div>
+			              <div class="controls" style='color:green'>
+			                    {% if success %}
+			                    	SMS sent successfully to {{ success }}
+			                    {% endif %}
+			              </div>
+			            </div>
+			            <div class="control-group">
 			            		{{ form.non_field_errors }}
 								<div class="fieldWrapper">
-    								{{ form.to_number.errors }}
     								<label for="{{ form.to_number.id_for_label }}">{{ form.to_number.label_tag }}</label>
     								{{ form.to_number }}
+    								<div style='color:red'>{{ form.to_number.errors }}</div>
 								</div>
 								<div class="fieldWrapper">
-    								{{ form.body.errors }}
     								<label for="{{ form.to_number.id_for_label }}">{{ form.body.label_tag }}</label>
     								{{ form.body }}
-								</div>
+    								<div style='color:red'>{{ form.body.errors }}</div>							
+    							</div>
         			    </div>
 			            <div class="control-group">
 			              <div class="controls">
 			                    <button class="btn btn-success">Send SMS</button>
-			              </div>
-			            </div>
-			            <div class="control-group">
-			              <div class="controls">
-			                    {% if error %}
-			                    	{{error}}
-			                    {% endif %}
 			              </div>
 			            </div>
 			         </fieldset>

@@ -6,6 +6,7 @@ from datetime import datetime
 from decimal import *
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+import re
 
 
 def send_sms_to(request):
@@ -32,9 +33,15 @@ def send_sms_to(request):
                 send_sms.sent_at = datetime.now()
                 send_sms.save()
                 # redirect to a new URL:
-                return HttpResponseRedirect(reverse('send_sms'))
+                return render(request, 'sms/sms.html', {'form': form, 'success': number})
             else:
-                return render(request, 'sms/sms.html', {'form': form, 'error': sent})
+                s=str(sent)[str(sent).rfind('Twilio returned the following information:'):str(sent).rfind('More information may be available here:')]
+                s=s[:s.rfind('.')+1]
+                pattern = re.compile("[A-Z]")
+                st=''
+                m = pattern.search(s, s.find(':')) 
+                s = s[:s.find(':')+1] + '\n' + s[m.start():]
+                return render(request, 'sms/sms.html', {'form': form, 'error': str(s)})
     # if a GET (or any other method) we'll create a blank form
     else:
         form = SendSMSForm()
