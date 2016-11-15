@@ -25,6 +25,8 @@ SECRET_KEY = '4^)g07zas1&f-@x*0712eot1b^0-s&i7sku!_j_gp9)x4o826u'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+DJANGO_TWILIO_FORGERY_PROTECTION = False
+
 ALLOWED_HOSTS = []
 
 
@@ -37,6 +39,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_twilio',
+    'django_sms_mail',
+    'sms',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -49,6 +54,10 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
 )
+
+TWILIO_ACCOUNT_SID = '********************************'
+TWILIO_AUTH_TOKEN = '*********************************'
+TWILIO_PHONE_NUMBER = '+1*********'
 
 ROOT_URLCONF = 'django_sms_mail.urls'
 
@@ -99,4 +108,26 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
+PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+
+
+TEMPLATE_DIRS = (
+    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+    os.path.join(PROJECT_ROOT, 'templates').replace('\\','/'),
+)
+
+# List of callables that know how to import templates from various sources.
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+#     'django.template.loaders.eggs.Loader',
+)
+

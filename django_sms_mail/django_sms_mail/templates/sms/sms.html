@@ -1,0 +1,49 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+		    <div class="col-md-6 col-md-offset-3">
+			    <form class="form-horizontal" action='.' method="POST"  name="Login_Form" >
+			       {% csrf_token %}
+			          <fieldset>
+			            <div id="legend">
+			              <legend class="">Send SMS using Twilio</legend>
+			            </div>
+			            <div class="control-group">
+			            		{{ form.non_field_errors }}
+								<div class="fieldWrapper">
+    								{{ form.to_number.errors }}
+    								<label for="{{ form.to_number.id_for_label }}">{{ form.to_number.label_tag }}</label>
+    								{{ form.to_number }}
+								</div>
+								<div class="fieldWrapper">
+    								{{ form.body.errors }}
+    								<label for="{{ form.to_number.id_for_label }}">{{ form.body.label_tag }}</label>
+    								{{ form.body }}
+								</div>
+        			    </div>
+			            <div class="control-group">
+			              <div class="controls">
+			                    <button class="btn btn-success">Send SMS</button>
+			              </div>
+			            </div>
+			            <div class="control-group">
+			              <div class="controls">
+			                    {% if error %}
+			                    	{{error}}
+			                    {% endif %}
+			              </div>
+			            </div>
+			         </fieldset>
+			</form>
+		</div>
+	</div>
+</div>
+</body>
+</html>
