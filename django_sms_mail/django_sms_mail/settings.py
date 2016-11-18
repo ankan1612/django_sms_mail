@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'django_twilio',
     'django_sms_mail',
     'sms',
+    'smsverification',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -55,9 +56,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
-TWILIO_ACCOUNT_SID = '*******************************'
-TWILIO_AUTH_TOKEN = '*******************************'
-TWILIO_PHONE_NUMBER = '+1********'
+TWILIO_ACCOUNT_SID = '*****************************'
+TWILIO_AUTH_TOKEN = '*****************************'
+TWILIO_PHONE_NUMBER = '+1**********'
 
 ROOT_URLCONF = 'django_sms_mail.urls'
 

@@ -1,0 +1,44 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+		    <div class="col-md-6 col-md-offset-3">
+			    <form class="form-horizontal" action='.' method="POST"  name="form" >
+			       {% csrf_token %}
+			          <fieldset>
+			            <div id="legend">
+			              <legend class="">SMS Verification </legend>
+			            </div>
+			            <div class="control-group">
+			              <div class="controls" style='color:red'>
+			                    {% if error %}
+			                    	{{ error|linebreaksbr }}
+			                    {% endif %}
+			              </div>
+			            </div>
+			            <div class="control-group">
+			            		{{ form.non_field_errors }}
+								<div class="fieldWrapper">
+    								<label for="{{ form.Phone_Number.id_for_label }}">{{ form.Phone_Number.label_tag }}</label>
+    								{{ form.Phone_Number }}
+    								<div style='color:red'>{{ form.Phone_Number.errors }}</div>
+								</div>
+        			    </div>
+			            <div class="control-group">
+			              <div class="controls">
+			                    <button class="btn btn-success">Send Verification Code</button>
+			              </div>
+			            </div>
+			         </fieldset>
+			</form>
+		</div>
+	</div>
+</div>
+</body>
+</html>
